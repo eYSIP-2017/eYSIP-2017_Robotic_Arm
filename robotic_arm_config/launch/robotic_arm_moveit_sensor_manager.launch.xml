@@ -1,0 +1,3 @@
+<launch>
+  <rosparam command="load" file="$(find robotic_arm_config)/config/sensors_rgbd.yaml" />
+</launch>
