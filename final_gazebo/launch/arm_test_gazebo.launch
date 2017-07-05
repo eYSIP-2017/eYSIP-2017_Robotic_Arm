@@ -1,5 +1,4 @@
 <launch>
-
   <!-- these are the arguments you can pass this launch file, for example paused:=true -->
   <arg name="paused" default="false"/>
   <arg name="use_sim_time" default="true"/>
@@ -35,5 +34,10 @@
 					          joint5_controller
 					          joint6_controller
                                    joint_state_controller"/>
+
+<!-- convert joint states to TF transforms for rviz, etc -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+  <remap from="/joint_states" to="/robotic_arm/joint_states" />
+  </node>
 
 </launch>
