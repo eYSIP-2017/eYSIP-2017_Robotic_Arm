@@ -1,0 +1,6 @@
+<launch> 
+ 
+	<!-- moveit launch file -->
+  	<include file="$(find final_config)/launch/moveit_planning_execution.launch" />    
+
+</launch>

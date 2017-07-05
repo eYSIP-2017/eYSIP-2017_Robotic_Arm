@@ -1,0 +1,10 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: mastering_ros_robot_description_pkg
+    relative_path: urdf/arm_design.xacro
+  SRDF:
+    relative_path: config/robotic_arm.srdf
+  CONFIG:
+    author_name: xyz
+    author_email: xyz@email.com
+    generated_timestamp: 1499246668

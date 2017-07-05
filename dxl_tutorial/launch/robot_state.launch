@@ -1,0 +1,20 @@
+<launch>
+
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find mastering_ros_robot_description_pkg)/urdf/arm_design.xacro'" />
+
+  <node name="State_Publisher" pkg="dxl_tutorial" type="state_publisher.py" /> 
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    		<param name="/use_gui" value="false"/>
+    		<rosparam param="/source_list">[/robotic_arm/joint_states]</rosparam>
+  </node>
+
+  <node pkg="tf" type="static_transform_publisher" name="map_base_tf" args="0 0 0 0 0 0 /map /bottom_link 50" />
+
+  <!-- convert joint states to TF transforms for rviz, etc -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+	respawn="false" output="screen">
+    <remap from="/joint_states" to="/robotic_arm/joint_states" />
+  </node>
+
+</launch>

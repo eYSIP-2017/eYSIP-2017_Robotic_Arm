@@ -1,0 +1,14 @@
+controller_manager_ns: controller_manager
+controller_list:
+  - name: robotic_arm/robotic_arm_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: true
+    joints:
+      - shoulder_pan_joint
+      - shoulder_pitch_joint
+      - shoulder_yaw_joint
+      - elbow_pitch_joint
+      - elbow_roll_joint
+      - wrist_pitch_joint
+

@@ -1,0 +1,14 @@
+<launch>
+    <node name="dynamixel_manager" pkg="dynamixel_controllers" type="controller_manager.py" required="true" output="screen">
+        <rosparam>
+            namespace: dxl_manager
+            serial_ports:
+                dxl_port:
+                    port_name: "/dev/ttyACM1"
+                    baud_rate: 9600
+                    min_motor_id: 1
+                    max_motor_id: 6
+                    update_rate: 20
+        </rosparam>
+    </node>
+</launch>
