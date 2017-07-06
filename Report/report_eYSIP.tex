@@ -1,0 +1,241 @@
+\documentclass[a4paper,12pt,oneside]{book}
+
+%-------------------------------Start of the Preable------------------------------------------------
+\usepackage[english]{babel}
+\usepackage{blindtext}
+\usepackage{wrapfig}
+\usepackage{multirow}
+%packagr for hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=cyan,
+}
+
+\urlstyle{same}
+%use of package fancy header
+\usepackage{fancyhdr}
+\setlength\headheight{26pt}
+\fancyhf{}
+%\rhead{\includegraphics[width=1cm]{logo}}
+\lhead{\rightmark}
+\rhead{\includegraphics[width=1cm]{logo}}
+\fancyfoot[RE, RO]{\thepage}
+\fancyfoot[CE, CO]{\href{http://www.e-yantra.org}{www.e-yantra.org}}
+
+\pagestyle{fancy}
+
+%use of package for section title formatting
+\usepackage{titlesec}
+\titleformat{\chapter}
+{\Large\bfseries} % format
+{}                % label
+{0pt}             % sep
+{\Huge}           % before-code
+
+\titlespacing*{\chapter}{0pt}{-50pt}{50pt}
+
+%use of package tcolorbox for colorful textbox
+\usepackage[most]{tcolorbox}
+\tcbset{colback=cyan!5!white,colframe=cyan!75!black,halign title = flush center}
+
+\newtcolorbox{mybox}[1]{colback=cyan!5!white,
+	colframe=cyan!75!black,fonttitle=\bfseries,
+	title=\textbf{\Large{#1}}}
+
+%use of package marginnote for notes in margin
+\usepackage{marginnote}
+
+%use of packgage watermark for pages
+%\usepackage{draftwatermark}
+%\SetWatermarkText{\includegraphics{logo}}
+\usepackage[scale=2,opacity=0.1,angle=0]{background}
+\backgroundsetup{
+	contents={\includegraphics{logo}}
+}
+
+%use of newcommand for keywords color
+\usepackage{xcolor}
+\newcommand{\keyword}[1]{\textcolor{red}{\textbf{#1}}}
+
+%package for inserting pictures
+\usepackage{graphicx}
+
+%package for highlighting
+\usepackage{color,soul}
+
+%new command for table
+\newcommand{\head}[1]{\textnormal{\textbf{#1}}}
+
+
+%----------------------End of the Preamble---------------------------------------
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+\begin{document}
+	
+	%---------------------Title Page------------------------------------------------
+	\begin{titlepage}
+		\raggedright
+		{\Large eYSIP2017\\[1cm]}
+		{\Huge\scshape Robotic Arm \\[.1in]}
+		\vfill
+		\begin{flushright}
+			{\large Aditya Gaddipati \\}
+			{\large Arjun Sadananda \\}
+			{\large Simranjeet, Lohit \\}
+			{\large Duration of Internship: 22/05/2017-07/07/2017 \\}
+		\end{flushright}
+		
+		{\itshape 2017, e-Yantra Publication}
+	\end{titlepage}
+	%-------------------------------------------------------------------------------
+	
+	\chapter[Project Tag]{Robotic Arm}
+	\section*{Abstract}
+	The motivation behind this project was to \textbf{DESIGN}(Mechanical) a robotic arm and \textbf{PLAN}(Computer Science) and \textbf{CONTROL}(Electronics) the motion of the arm in real time using \textbf{Kinect- Point Cloud}.
+	
+	\subsection*{Completion status}
+	Give details for work/project completed successfully. If work is not
+	complete, mention the details till which task is done.
+	\begin{itemize}
+		\item \textbf{Designed a Robotic Arm} with \textit{6 DOF powered by Dynamixel AX12A}, resembling the dynamics of a \textit{real human arm} from shoulder, elbow to wrist. Complete with a gripper design powered by MicroServo(9g).
+		\item \textbf{Controlled} the arm using Arduino Mega (Atmega 2560) through a \textbf{GUI} created using Processing.
+		\item \textbf{Interfaced} 6 Dynamixel AX 12A motors with ROS, using Arduino Mega to control the \textbf{flow of packets} between \textbf{dynamixel\_motor} package in ROS and Dynamixel.
+		\item Created a \textbf{URDF model} of the arm and mirrored(visualized) the real model movements on the mathematical model using the feedback from Dynamixel on \textbf{RViz}.
+		\item Built a \textbf{PCB(Arduino Sheild)} to interface Arduino Mega with Dynamixel via \textit{74LS241 buffer} and power the arm from SMP.
+		\item Used \textbf{MoveIt} to generate a trajectory for the robotic arm to move to goal position and send the instructions to the arm.
+		\newline
+		Not Reliable yet... requires more tests and corrections for reliable motion execution.
+		\item Used \textbf{PointCloudLibrary} on roscpp to process the point cloud from the \textbf{Kinect} to get clusters of objects on a table.
+		\newline
+		Object recognition is not achieved.
+	\end{itemize}
+	% **************************HARDWARE PARTS*********************
+	\section{Hardware parts}
+	\begin{itemize}
+		\item 6 Dynamixel AX 12A 
+		\href{http://www.trossenrobotics.com/images/productdownloads/AX-12(English).pdf}{Datasheet},
+		\item Arduino Mega (Atmega 2560)
+		\href{https://www.arduino.cc/en/uploads/Main/arduino-mega2560_R3-sch.pdf}{Datasheet}
+		\item 1 SMP
+		\item 1 74LS241 buffer 
+		\href{https://www.arduino.cc}{Datasheet}
+		\item Connection diagram
+	\end{itemize}
+	
+	% ***********************SOFTWARE USED*****************
+	\section{Software used}
+	\begin{itemize}
+		\item Fusion 360: version
+		\href{https://www.autodesk.com/products/fusion-360/overview}{Official Website} 
+		\item Cura ver 2.5.0
+		\href{https://ultimaker.com/en/products/cura-software}{Official Website}
+		\item ROS Indigo
+		\href{https://www.ros.org}{Official Website}
+		\newline
+		\tab Packages:
+		\newline
+		\tab \tab \href{http://wiki.ros.org/dynamixel_motor}{dynamixel\_motor}
+		\newline
+		\tab \tab \href{http://moveit.ros.org/}{MoveIt}
+		\newline
+		\tab \tab \href{http://wiki.ros.org/freenect_launch}{freenect\_launch}
+		\item Arduino IDE
+		\href{https://www.arduino.cc}{Official Website}
+		\item Processing IDE
+		\href{https://www.processing.org}{Official Website}
+		\item Library: 
+		\href{http://pointclouds.org}{PointCloudLibrary}
+	\end{itemize}
+	
+	% **********************ASSEMBLY OF HARDWARE*********************
+	\section{Assembly of hardware}
+
+	\begin{tabular} { p{210pt} p{144pt} }
+		Circuit diagram and Steps of assembly of hardware with pictures for each step&
+		\multirow{3}{*} {\includegraphics[width=144pt]{circuit.jpg}} \\
+		\subsection*{Circuit Diagram}
+		Circuit schematic from Eagle
+		\subsection*{Arm Assembly}
+		Assembling Robotic Arm is self explanatory.
+	\end{tabular}
+	
+	
+	\pagebreak
+	
+	\subsection*{Parts}
+	\begin{tabular} { p{118pt}  p{118pt}  p{118pt} }
+		\textbf{Shoulder} & \textbf{Elbow} & \textbf{Wrist and Grabber} \\
+		\includegraphics[width=118pt]{shoulder.jpg}&
+		\includegraphics[width=118pt]{elbow.jpg}&
+		\includegraphics[width=118pt]{wrist.jpg}
+	\end{tabular}
+	
+	% ****************SOFTWARE AND CODE**********************
+	
+	\section{Software and Code}
+	\href{http://www.github.com}{Github link} for the repository of code
+	\begin{itemize}
+		\item dxl\_pc\_bridge.ino: Arduino Code for controlling flow of packets.
+		\item dxl\_controller.ino: Arduino code for controlling the robotic arm.
+		\item dxl\_controller.pde: Processing code for the processing GUI.
+		\item control\_manager.launch: Starts Controller\_Manager
+		\item robot\_state.launch: Publishes current state of the robot.
+		\item start\_meta\_controller.launch: Starts joint trajectory action controller.
+		\item robotic\_arm\_bringup\_rviz.launch: Starts MoveIt!
+		\item Object Detection Directory: roscpp code to subscribe to kinect raw point cloud and publishes processed point cloud
+		\begin{itemize}
+			\item VoxelGrid Downsampling
+			\item RANSAC Plane Detection
+			\item Conditional Removal
+			\item Euclidean Clustering
+		\end{itemize}
+	\end{itemize}
+	
+	\pagebreak
+	\section{Use and Demo}
+	\subsection*{Demo}
+	\href{http://www.youtube.com}{Youtube Link} of demonstration video
+	\subsection*{Full Assembly}
+	
+	\begin{center}
+	\includegraphics[width=.9\linewidth]{full_assembly.jpg}
+\end{center}
+	
+	
+	\section{Future Work}
+	\begin{itemize}
+		\item MoveIt:
+		Execution of MoveIt must be tested and necessary corrections must be done to achieve consistent results.
+		\item Kinect:
+		Continue work with pcl.
+		Use the cluster along with color information and feed it to machine learning module to achieve object recognition.
+		\item Design:
+		Modification to design can be done to achieve greater range of motion. Ex: slight change in elbow design can increase downward motion of the fore arm.
+	\end{itemize}
+	
+	\section{Bug report and Challenges}
+	\begin{itemize}
+		\item sync\_write function in dynamixel\_motor -$>$ dynamixel\_driver -$>$ dynamixel\_io.py needed to be modified to call write for every ID, Since in Arduino Code - dxl\_serial we couldnt handle broadcast packages.
+		\item Dynamixel AX 12A ID=3 was replaced with ID=6 and ID=6 with AX12W since it completely stopped responding and AX12A ID=1 - ShoulderRoll stopped giving position feedback. These two issues need to be looked into. Temporarily we replaced these with AX12W motors.
+		\item The present design provides ~10 kg.cm load at worst cases, but for smooth movement load must be kept below 1/5th of max load i.e. 1/5*15kg.cm
+	\end{itemize}
+	
+	
+	\begin{thebibliography}{li}
+		\bibitem{rosbook1}Mastering ROS for Robotics Programming: {by Lentin Joseph}
+		\bibitem{rosbook2}ROS by Example Vol2: {by R. Patrick Goebel}
+		\bibitem{ros}MoveIt: {http://moveit.ros.org/}
+		\bibitem{dxl}ROS: {http://wiki.ros.org/dynamixel\_motor}
+		\bibitem{f360}Fusion 360: {Youtube Tutorials by Channel: Autodesk Fusion 360}
+		\bibitem{wonderTiger}thingiverse.com:
+		{\em  WonderTiger, Gripper Design }
+		
+	\end{thebibliography}
+	
+	
+\end{document}
+
